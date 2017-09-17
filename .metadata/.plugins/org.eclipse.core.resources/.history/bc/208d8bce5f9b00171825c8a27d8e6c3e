@@ -1,0 +1,10 @@
+import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDA;
+
+public class Connection {
+	public static void main (String[] args) {
+		JDA discord = null;
+		
+		discord = new JDABuilder(AccountType.BOT);
+	}
+}

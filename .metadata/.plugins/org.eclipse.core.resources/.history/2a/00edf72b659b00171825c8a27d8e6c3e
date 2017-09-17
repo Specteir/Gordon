@@ -1,0 +1,26 @@
+package main;
+
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
+
+public class MessageResponder extends ListenerAdapter {
+	private static final String IDENTIFIER = ".g ";
+
+	public void onMessageReceived(MessageReceivedEvent event) {
+		String message = event.getMessage().getContent();
+
+		if (message.startsWith(IDENTIFIER + "hello")) {
+			String name = event.getAuthor().getName();
+
+			String response = name + ", hello and welcome";
+
+			event.getTextChannel().sendMessage(response).queue();
+		} else if (message.startsWith(IDENTIFIER + "jew")) {
+			String name = event.getAuthor().getName();
+
+			String response = ":star_of_david: :star_of_david: ";
+
+			event.getTextChannel().sendMessage(response).queue();
+		}
+	}
+}

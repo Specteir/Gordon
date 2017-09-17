@@ -1,0 +1,4 @@
+
+public class Constants {
+	public static final String discordToken = "MzA1NTQ3MjQ4OTM3MzM2ODMz.DJ-BdA.oiGLfMRpuMEWIjneJ5qfa5yTVFQ";
+}

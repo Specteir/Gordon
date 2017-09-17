@@ -1,0 +1,11 @@
+import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.JDABuilder;
+
+public class Connection {
+	public static void main (String[] args) {
+		JDA discord = null;
+		
+		discord = new JDABuilder(AccountType.BOT).setToken(Constants.discordToken).buildBlocking();
+	}
+}
