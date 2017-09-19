@@ -5,22 +5,26 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class MessageResponder extends ListenerAdapter {
 	private static final String IDENTIFIER = ".g ";
+	String response;
+	CommandManager commander = new CommandManager();
 
 	public void onMessageReceived(MessageReceivedEvent event) {
 		String message = event.getMessage().getContent();
-		String name = event.getAuthor().getName();
 
 		if (message.startsWith(IDENTIFIER + "hello")) {
-			name = event.getAuthor().getName();
-
-			String response = name + ", hello and welcome";
-
+			response = commander.hello(event);
 			event.getTextChannel().sendMessage(response).queue();
 		} else if (message.startsWith(IDENTIFIER + "who")) {
 
-			String response = "You are " + name;
+			response = commander.who(event);
 
 			event.getTextChannel().sendMessage(response).queue();
+		} else if (message.startsWith(IDENTIFIER + "register")) {
+			response = commander.register(event);
+		} else if (message.startsWith(IDENTIFIER + "report")) {
+			// TODO: Build in functionality to recognize who needs to be reported
+		} else if (message.startsWith(IDENTIFIER)) {
+			event.getTextChannel().sendMessage("Invalid command").queue();
 		}
 	}
 }

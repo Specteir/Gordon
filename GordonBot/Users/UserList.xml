@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <server>
-	<user id="Specteir">
+	<user>
+		<username>Specteir</username>
 		<musicViolations>0</musicViolations>
-		<chatViolations>0</chatViolations>
+		<textViolations>0</textViolations>
 		<startDate>09/18/2017</startDate>
 	</user>
 </server>

@@ -13,6 +13,13 @@ public class User {
 	int textViolations;
 	String startDate;
 
+	public User() {
+		userName = "";
+		musicViolations = 0;
+		textViolations = 0;
+		startDate = "";
+	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -43,6 +50,14 @@ public class User {
 
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
+	}
+
+	@Override
+	public String toString() {
+		String string = new String();
+		string = getUserName() + "\nMusic Violations: " + getMusicViolations() + "\nText Violations: "
+				+ getTextViolations() + "\nStart Date: " + getStartDate();
+		return string;
 	}
 
 }

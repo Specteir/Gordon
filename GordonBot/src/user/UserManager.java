@@ -15,13 +15,17 @@ public class UserManager {
 	ArrayList<User> userList;
 
 	public UserManager(String filename) {
-
+		userList = readUsers(filename);
 	}
 
-	public ArrayList<User> readUsers() {
+	public ArrayList<User> getUserList() {
+		return userList;
+	}
+
+	private ArrayList<User> readUsers(String filename) {
 		ArrayList<User> returnList = new ArrayList<User>();
 		try {
-			File xmlFile = new File("Users/UserList.xml");
+			File xmlFile = new File(filename);
 
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -29,7 +33,7 @@ public class UserManager {
 
 			doc.getDocumentElement().normalize();
 
-			NodeList nList = doc.getElementsByTagName("user");
+			NodeList nList = doc.getElementsByTagName("server");
 
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
@@ -39,7 +43,7 @@ public class UserManager {
 					Element eElement = (Element) node;
 
 					User user = new User();
-					user.setUserName(eElement.getAttribute("id"));
+					user.setUserName(eElement.getElementsByTagName("username").item(0).getTextContent());
 					user.setMusicViolations(Integer
 							.parseInt(eElement.getElementsByTagName("musicViolations").item(0).getTextContent()));
 					user.setTextViolations(
@@ -55,5 +59,19 @@ public class UserManager {
 			e.printStackTrace();
 		}
 		return returnList;
+	}
+
+	public User getUser(String userName) {
+		for (int i = 0; i < userList.size(); i++) {
+			if (userList.get(i).getUserName().equals(userName)) {
+				return userList.get(i);
+			}
+		}
+		return null;
+	}
+
+	public void addUser(User user) {
+		// TODO Write the user to the XML file.
+
 	}
 }
