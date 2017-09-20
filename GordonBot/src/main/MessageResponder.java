@@ -22,7 +22,14 @@ public class MessageResponder extends ListenerAdapter {
 		} else if (message.startsWith(IDENTIFIER + "register")) {
 			response = commander.register(event);
 		} else if (message.startsWith(IDENTIFIER + "report")) {
-			// TODO: Build in functionality to recognize who needs to be reported
+			String userName = message.substring(11);
+			String violationType;
+			if (message.contains("text")) {
+				violationType = "text";
+			} else {
+				violationType = "music";
+			}
+			response = commander.report(event);
 		} else if (message.startsWith(IDENTIFIER)) {
 			event.getTextChannel().sendMessage("Invalid command").queue();
 		}

@@ -38,4 +38,17 @@ public class CommandManager {
 			return event.getAuthor().getName() + " has been registered";
 		}
 	}
+
+	public String report(MessageReceivedEvent event) {
+		String message = event.getMessage().getContent();
+		String userName = message.substring(11);
+		String violationType;
+		if (message.contains("text")) {
+			violationType = "text";
+		} else {
+			violationType = "music";
+		}
+
+		return event.getAuthor().getName() + " has been reported for a " + violationType + " violation";
+	}
 }
