@@ -12,66 +12,66 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class UserManager {
-	ArrayList<User> userList;
+    ArrayList<User> userList;
 
-	public UserManager(String filename) {
-		userList = readUsers(filename);
-	}
+    public UserManager(String filename) {
+        userList = readUsers(filename);
+    }
 
-	public ArrayList<User> getUserList() {
-		return userList;
-	}
+    public ArrayList<User> getUserList() {
+        return userList;
+    }
 
-	private ArrayList<User> readUsers(String filename) {
-		ArrayList<User> returnList = new ArrayList<User>();
-		try {
-			File xmlFile = new File(filename);
+    private ArrayList<User> readUsers(String filename) {
+        ArrayList<User> returnList = new ArrayList<User>();
+        try {
+            File xmlFile = new File(filename);
 
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(xmlFile);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(xmlFile);
 
-			doc.getDocumentElement().normalize();
+            doc.getDocumentElement().normalize();
 
-			NodeList nList = doc.getElementsByTagName("server");
+            NodeList nList = doc.getElementsByTagName("server");
 
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node node = nList.item(i);
 
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
 
-					Element eElement = (Element) node;
+                    Element eElement = (Element) node;
 
-					User user = new User();
-					user.setUserName(eElement.getElementsByTagName("username").item(0).getTextContent());
-					user.setMusicViolations(Integer
-							.parseInt(eElement.getElementsByTagName("musicViolations").item(0).getTextContent()));
-					user.setTextViolations(
-							Integer.parseInt(eElement.getElementsByTagName("textViolations").item(0).getTextContent()));
-					;
-					user.setStartDate(eElement.getElementsByTagName("startDate").item(0).getTextContent());
+                    User user = new User();
+                    user.setUserName(eElement.getElementsByTagName("username").item(0).getTextContent());
+                    user.setMusicViolations(Integer
+                            .parseInt(eElement.getElementsByTagName("musicViolations").item(0).getTextContent()));
+                    user.setTextViolations(
+                            Integer.parseInt(eElement.getElementsByTagName("textViolations").item(0).getTextContent()));
+                    ;
+                    user.setStartDate(eElement.getElementsByTagName("startDate").item(0).getTextContent());
 
-					returnList.add(user);
-				}
+                    returnList.add(user);
+                }
 
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return returnList;
-	}
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnList;
+    }
 
-	public User getUser(String userName) {
-		for (int i = 0; i < userList.size(); i++) {
-			if (userList.get(i).getUserName().equals(userName)) {
-				return userList.get(i);
-			}
-		}
-		return null;
-	}
+    public User getUser(String userName) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUserName().equals(userName)) {
+                return userList.get(i);
+            }
+        }
+        return null;
+    }
 
-	public void addUser(User user) {
-		// TODO Write the user to the XML file.
+    public void addUser(User user) {
+        // TODO Write the user to the XML file.
 
-	}
+    }
 }

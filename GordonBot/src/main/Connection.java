@@ -2,6 +2,7 @@ package main;
 
 import javax.security.auth.login.LoginException;
 
+import cmd.BasicCmd;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -29,7 +30,6 @@ public class Connection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		discord.addEventListener(new MessageResponder());
+		discord.addEventListener(new BasicCmd());
 	}
 }
