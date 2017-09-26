@@ -3,6 +3,7 @@ package main;
 import javax.security.auth.login.LoginException;
 
 import cmd.BasicCmd;
+import cmd.ReportCmd;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -31,5 +32,6 @@ public class Connection {
 			e.printStackTrace();
 		}
 		discord.addEventListener(new BasicCmd());
+		discord.addEventListener(new ReportCmd());
 	}
 }

@@ -16,6 +16,7 @@ public abstract class Command extends ListenerAdapter {
     private String content;
     private MessageChannel channel;
     private ArrayList<String> args;
+    private boolean validCommand;
 
     public final String IDENTIFIER = ".g";
 
@@ -23,16 +24,25 @@ public abstract class Command extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        author = event.getAuthor();
-        message = event.getMessage();
-        content = message.getContent();
-        channel = event.getChannel();
+        clearFields();
+        if (event.getMessage().getContent().startsWith(IDENTIFIER) && !(event.getAuthor().isBot())) {
+            author = event.getAuthor();
+            message = event.getMessage();
+            content = message.getContent();
+            channel = event.getChannel();
 
-        args = new ArrayList<String>();
-        scanner = new Scanner(content);
-        scanner.useDelimiter(" ");
-        while (scanner.hasNext()) {
-            args.add(scanner.next());
+            args = new ArrayList<String>();
+            scanner = new Scanner(content);
+            scanner.useDelimiter(" ");
+            while (scanner.hasNext()) {
+                args.add(scanner.next());
+            }
+//            for (int i = 0;i<args.size();i++) {
+//                System.out.println(args.get(i));
+//            }
+            validCommand = true;
+        } else {
+            validCommand = false;
         }
     }
 
@@ -55,4 +65,17 @@ public abstract class Command extends ListenerAdapter {
     public ArrayList<String> getArgs() {
         return args;
     }
+
+    public boolean isValidCommand() {
+        return validCommand;
+    }
+
+    private void clearFields() {
+        author = null;
+        message = null;
+        content = null;
+        channel = null;
+        args = null;
+    }
+
 }

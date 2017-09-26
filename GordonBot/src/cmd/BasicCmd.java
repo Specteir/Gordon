@@ -8,9 +8,13 @@ public class BasicCmd extends Command{
     public void onMessageReceived(MessageReceivedEvent event) {
         super.onMessageReceived(event);
 
-        if (getArgs().get(0).equals(IDENTIFIER)) {
-            if (getArgs().get(1).equals("hello")) {
+        if (isValidCommand()) {
+            String command = getArgs().get(1);
+            if (command.equals("hello")) {
                 getChannel().sendMessage("Hello, and welcome!").queue();
+            }
+            else if (command.equals("who")) {
+                getChannel().sendMessage("You are " + getAuthor().getName()).queue();
             }
         }
         else {
