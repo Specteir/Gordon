@@ -1,4 +1,4 @@
-package main;
+package connection;
 
 import javax.security.auth.login.LoginException;
 
